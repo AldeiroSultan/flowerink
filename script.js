@@ -24,7 +24,6 @@ window.setTimeout(() => {
 // only for codepen preview
 let isStart = true;
 
-
 let isRendering = true;
 
 let renderer, shaderScene, mainScene, sceneTest, renderTargets, camera, clock;
@@ -37,37 +36,36 @@ initScene();
 updateSize();
 window.addEventListener("resize", updateSize);
 
-    function handleClickOrTouch(e) {
-        e.preventDefault(); // Prevent default touch behavior
+function handleClickOrTouch(e) {
+    e.preventDefault(); // Prevent default touch behavior
 
-        if (e.target !== toggleEl) {
-            let clientX, clientY;
+    if (e.target !== toggleEl) {
+        let clientX, clientY;
 
-            if (e.type === "click") {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            } else if (e.type === "touchstart") {
-                const touch = e.touches[0];
-                clientX = touch.clientX;
-                clientY = touch.clientY;
-            }
-
-            pointer.x = clientX / window.innerWidth;
-            pointer.y = clientY / window.innerHeight;
-            pointer.clicked = true;
-            isRendering = true;
-        } else {
-            isRendering = !isRendering;
+        if (e.type === "click") {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        } else if (e.type === "touchstart") {
+            const touch = e.touches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
         }
 
-        toggleEl.innerHTML = isRendering ? "freeze" : "unfreeze";
+        pointer.x = clientX / window.innerWidth;
+        pointer.y = clientY / window.innerHeight;
+        pointer.clicked = true;
+        isRendering = true;
+    } else {
+        isRendering = !isRendering;
     }
 
-    window.addEventListener("click", handleClickOrTouch);
-    window.addEventListener("touchstart", handleClickOrTouch);
+    toggleEl.innerHTML = isRendering ? "freeze" : "unfreeze";
+}
+
+window.addEventListener("click", handleClickOrTouch);
+window.addEventListener("touchstart", handleClickOrTouch);
 
 render();
-
 
 function initScene() {
     renderer = new THREE.WebGLRenderer({
@@ -126,13 +124,11 @@ function initScene() {
     mainScene.add(planeBasic);
 }
 
-
 function render() {
     requestAnimationFrame(render);
     const delta = clock.getDelta();
 
     if (isRendering) {
-
         shaderMaterial.uniforms.u_texture.value = renderTargets[0].texture;
         shaderMaterial.uniforms.u_time.value = clock.getElapsedTime() + .9; // offset for 1st flower color
 
