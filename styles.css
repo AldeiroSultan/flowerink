@@ -13,7 +13,7 @@ canvas {
 }
 
 .name {
-    font-family: sans-serif;
+    font-family: 'Playfair Display', serif;
     position: absolute;
     top: 30%;
     left: 0;
@@ -22,16 +22,20 @@ canvas {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: #8B0000; /* dark red */
     text-align: center;
-    font-size: 20px;
-    text-shadow: 0 0 3px #ffffff;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
     user-select: none;
     pointer-events: none;
+    line-height: 1.5;
 }
 
 .name span {
-    background-color: rgba(255, 255, 255, .6);
+    background-color: rgba(255, 255, 255, .7);
+    padding: 20px 40px;
+    border-radius: 8px;
+    letter-spacing: 1px;
 }
 
 .render-toggle {
